@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ApiClient.Controllers
 {
@@ -21,6 +22,7 @@ namespace ApiClient.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            Debug.WriteLine("[" + DateTime.UtcNow.ToString() + "] API call to container: " + System.Environment.MachineName);
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

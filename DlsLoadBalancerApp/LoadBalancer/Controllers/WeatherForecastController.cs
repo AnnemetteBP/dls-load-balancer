@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
+using System.Diagnostics;
 
 namespace LoadBalancer.Controllers
 {
@@ -27,15 +28,14 @@ namespace LoadBalancer.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
+            Debug.WriteLine("[" + DateTime.UtcNow.ToString() + "] Load balancer redirects request.");
             string url = WeatherForecastController.loadBalancer.NextService();
             RestClient client = new RestClient(url);
             RestRequest request = new RestRequest();
-            var response = client.GetAsync(request);
-            response.Wait();
-            RestResponse result = response.Result;
-            ObjectResult responseObject = new ObjectResult(result.Content);
+            RestResponse response = await client.GetAsync(request);
+            ObjectResult responseObject = new ObjectResult(response.Content);
             responseObject.ContentTypes.Add("application/json");
             return responseObject;
         }
