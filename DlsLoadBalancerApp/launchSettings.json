@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "loadbalancer",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/swagger",
+      "serviceActions": {
+        "apiclient1": "StartDebugging",
+        "loadbalancer": "StartDebugging",
+        "apiclient2": "StartDebugging"
+      }
+    }
+  }
+}

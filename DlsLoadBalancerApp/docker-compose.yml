@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  loadbalancer:
+    image: ${DOCKER_REGISTRY-}loadbalancer
+    build:
+      context: .
+      dockerfile: LoadBalancer/Dockerfile
+
+  apiclient1:
+    image: ${DOCKER_REGISTRY-}apiclient
+    build:
+      context: .
+      dockerfile: ApiClient/Dockerfile
+
+  apiclient2:
+    image: ${DOCKER_REGISTRY-}apiclient
+    build:
+      context: .
+      dockerfile: ApiClient/Dockerfile
+
